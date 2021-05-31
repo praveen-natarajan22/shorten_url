@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>URL Shortener APP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   <style>
+    .navbar-inverse {
+    background-color: #1631f7;
+    border-color: #3568f6;
+}
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+    font-weight: 800;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #3568f6;
+    font-weight: 800;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+}
+.w3-container, .w3-panel {
+    padding: 1.01em 13px 10px !important;
+}
+  </style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body> 
+<nav class="navbar navbar-inverse  navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">URL Shortener APP</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="/">Home</a></li>
+      <li class="active"><a href="/url/stats">Stats</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="w3-container" style="margin-top:50px">
+  <h2>Analytics</h2>
+  <% if @url.size!=0
+  @url.each do |u| %>
+    <div class="w3-panel w3-card">
+      <p>
+        <h4><b> <%=u.url%></b></h4>
+      Short URL: <a href="http://localhost:3000/<%=u.shorturl%>" style="color:blue;" target="_blank">http://localhost:3000/<%=u.shorturl%></a><br>
+        Total Clicks: <b><%=u.clicked%></b><br>
+        Top Countries: <b><%=u.country%></b><br>
+        Top Ip Addresses: <b><%=u.ipaddress%></b>
+      </p>
+    </div>
+    <% end %>
+    <% else %>
+    <div class="w3-panel w3-card">
+        <p>No Record Found!!!</p>
+    </div>
+  <% end %>
+</div>
+</body>
+</html>

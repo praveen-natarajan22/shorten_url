@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>URL Shortener APP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  	.navbar-inverse {
+    background-color: #1631f7;
+    border-color: #3568f6;
+}
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+    font-weight: 800;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #3568f6;
+    font-weight: 800;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #3568f6;
+    border-color: #3568f6;
+    font-weight: 800;
+    font-size: 14px;
+}
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse  navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">URL Shortener APP</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li id="stats"><a href="/url/stats">Stats</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container" style="margin-top:50px">
+
+	<h1>Welcome to URL Shortener APP</h1>
+
+
+  <label >Please Enter the URL here:</label>
+
+<form id="urlshort" action="/url" method="POST">
+  <div class="form-group col-sm-10">
+    <input type="url" class="form-control" name="url" id="url">
+  </div>
+    <button type="submit" class="btn btn-primary">SHORTEN</button>
+</form>
+<br>
+<div id="shorturl"></div>
+
+
+</div>
+
+<script type="text/javascript">
+  /* attach a submit handler to the form */
+$("#urlshort").submit(function(event) {
+  /* stop form from submitting normally */
+  event.preventDefault();
+  /* get the action attribute from the <form action=""> element */
+  var $form = $(this),
+    url = $form.attr('action');
+  /* Send the data using post with element id name and name2*/
+  var posting = $.post(url, {
+    url: $('#url').val()
+  });
+  /* Alerts the results */
+  posting.done(function(data) {
+    $("#shorturl").html(data);
+  });
+  posting.fail(function() {
+    $("#shorturl").html(data);
+  });
+});
+</script>
+</body>
+</html>
+
+
